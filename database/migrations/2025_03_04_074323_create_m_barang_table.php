@@ -13,17 +13,20 @@ return new class extends Migration
     {
         Schema::create('m_barang', function (Blueprint $table) {
             $table->id('barang_id');
-            $table->unsignedBigInteger('level_id')->index();
-            $table->string('kategori_kode', 10);
-            $table->string('kategori_nama', 100);
-            $table->integer('harga_beli', false, true)->length(11);
-            $table->integer('harga_jual', false, true)->length(11);
+            $table->unsignedBigInteger('kategori_id')->index(); // indexing untuk ForeignKey
+            $table->string('barang_kode', 10)->unique();
+            $table->string('barang_nama', 100);
+            $table->integer('harga_beli');
+            $table->integer('harga_jual');
             $table->timestamps();
 
-            $table->foreign('level_id')->references('level_id')->on('m_kategori')->onDelete('cascade');
+            $table->foreign('kategori_id')->references('kategori_id')->on('m_kategori');
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('m_barang');
