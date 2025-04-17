@@ -31,7 +31,7 @@ use App\Http\Controllers\WelcomeController;
  
  Route::group(['prefix' => 'level'], function () {
      Route::get('/', [LevelController::class, 'index'])->name('level.index'); // Menampilkan daftar level
-     Route::post('/list', [LevelController::class, 'getLevels'])->name('level.list'); // DataTables JSON
+     Route::post('/list', [LevelController::class, 'list'])->name('level.list');
      Route::get('/create', [LevelController::class, 'create'])->name('level.create'); // Form tambah
      Route::post('/', [LevelController::class, 'store'])->name('level.store'); // Simpan data baru
      Route::get('/create_ajax', [LevelController::class, 'create_ajax']); // Menampilkan halaman form tambah level Ajax
@@ -44,6 +44,7 @@ use App\Http\Controllers\WelcomeController;
      Route::get('/{id}/edit', [LevelController::class, 'edit'])->name('level.edit'); // Form edit
      Route::put('/{id}', [LevelController::class, 'update'])->name('level.update'); // Simpan perubahan
      Route::delete('/{id}', [LevelController::class, 'destroy'])->name('level.destroy'); // Hapus level
+     Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax'])->name('level.show_ajax');
  });
 
 
