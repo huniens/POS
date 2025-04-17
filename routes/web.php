@@ -3,7 +3,8 @@
  use App\Http\Controllers\BarangController;
  use App\Http\Controllers\KategoriController;
  use App\Http\Controllers\LevelController;
- use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\SupplierController;
  use App\Http\Controllers\UserController;
  use Illuminate\Support\Facades\Route;
  use App\Http\Controllers\POSController;
@@ -95,5 +96,15 @@ Route::group(['prefix' => 'stok'], function () {
     Route::get('/{id}/edit', [StokController::class, 'edit']);      // menampilkan halaman form edit stok
     Route::put('/{id}', [StokController::class, 'update']);         // menyimpan perubahan data stok
     Route::delete('/{id}', [StokController::class, 'destroy']);     // menghapus data stok
+});
+
+Route::prefix('penjualan')->group(function () {
+    Route::get('/', [PenjualanController::class, 'index'])->name('penjualan.index'); // Menampilkan daftar penjualan
+    Route::get('create', [PenjualanController::class, 'create'])->name('penjualan.create'); // Menampilkan form tambah penjualan
+    Route::post('store', [PenjualanController::class, 'store'])->name('penjualan.store'); // Menyimpan penjualan baru
+    Route::get('{id}', [PenjualanController::class, 'show'])->name('penjualan.show'); // Menampilkan detail penjualan 
+    Route::get('{id}/edit', [PenjualanController::class, 'edit'])->name('penjualan.edit'); // Menampilkan form edit penjualan 
+    Route::put('{id}', [PenjualanController::class, 'update'])->name('penjualan.update'); // Update data penjualan 
+    Route::delete('{id}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy'); // Hapus penjualan 
 });
  
