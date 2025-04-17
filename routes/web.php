@@ -49,7 +49,8 @@ use App\Http\Controllers\WelcomeController;
 
  Route::group(['prefix' => 'kategori'], function () {
     Route::get('/', [KategoriController::class, 'index'])->name('kategori.index'); // Menampilkan daftar kategori
-    Route::post('/list', [KategoriController::class, 'getKategori'])->name('kategori.list'); // Data JSON untuk DataTables
+    Route::post('/list', [KategoriController::class, 'list'])->name('kategori.list');
+    // Data JSON untuk DataTables
     Route::get('/create', [KategoriController::class, 'create'])->name('kategori.create'); // Form tambah kategori
     Route::post('/', [KategoriController::class, 'store'])->name('kategori.store'); // Simpan kategori baru
     Route::get('/create_ajax', [KategoriController::class, 'create_ajax'])->name('kategori.create_ajax');// Form tambah kategori (AJAX)
@@ -61,7 +62,8 @@ use App\Http\Controllers\WelcomeController;
     Route::get('/{id}/edit', [KategoriController::class, 'edit'])->name('kategori.edit'); // Form edit kategori
     Route::put('/{id}', [KategoriController::class, 'update'])->name('kategori.update'); // Simpan perubahan kategori
     Route::delete('/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy'); // Hapus kategori
-    Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax'])->name('kategori.delete_ajax'); // Hapus kategori (AJAX)
+    Route::delete('/{id}/delete_ajax', [KategoriController::class, 'delete_ajax'])->name('kategori.delete_ajax'); 
+    Route::get('/{id}/show_ajax', [KategoriController::class, 'show_ajax'])->name('kategori.show_ajax');
 
 });
 
