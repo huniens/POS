@@ -72,14 +72,21 @@ class StokController extends Controller
         $user = UserModel::all();
         $activeMenu = 'stok';
 
-        return view('stok.create', [
-            'breadcrumb' => $breadcrumb,
-            'page' => $page,
-            'barang' => $barang,
-            'user' => $user,
-            'activeMenu' => $activeMenu
-        ]);
+        $breadcrumb = (object) [
+            'title' => 'Tambah Stok',
+            'list' => ['Home', 'Stok', 'Tambah']
+        ];
+    
+        $page = (object) ['title' => 'Tambah stok baru'];
+    
+        $supplier = SupplierModel::all(); // Ambil semua supplier
+        $barang = BarangModel::all();
+        $user = UserModel::all();
+        $activeMenu = 'stok';
+    
+        return view('stok.create', compact('breadcrumb', 'page', 'supplier', 'barang', 'user', 'activeMenu'));
     }
+    
 
     public function create_ajax()
     {

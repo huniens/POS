@@ -15,22 +15,24 @@ class PenjualanController extends Controller
             'title' => 'Daftar Penjualan',
             'list' => ['Home', 'Penjualan']
         ];
-
+    
         $page = (object) [
             'title' => 'Daftar semua transaksi penjualan'
         ];
-
+    
         $activeMenu = 'penjualan';
-
-        $penjualans = Penjualan::with('user')->get(); // Ambil data beserta user-nya
-
+        
+        $penjualan = Penjualan::with('user')->get();
+    
         return view('penjualan.index', [
+            'penjualan' => $penjualan,
             'breadcrumb' => $breadcrumb,
             'page' => $page,
-            'activeMenu' => $activeMenu,
-            'penjualans' => $penjualans
+            'activeMenu' => $activeMenu
         ]);
     }
+    
+    
 
     // Menampilkan halaman form tambah penjualan
     public function create()
@@ -47,12 +49,13 @@ class PenjualanController extends Controller
         $activeMenu = 'penjualan';
         $users = UserModel::all(); // Digunakan untuk pilihan user_id
 
-        return view('penjualan.create', [
+        return view('penjualan.creat', [
             'breadcrumb' => $breadcrumb,
             'page' => $page,
             'activeMenu' => $activeMenu,
             'users' => $users
         ]);
+        
     }
 
     // Menyimpan data penjualan baru

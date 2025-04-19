@@ -27,16 +27,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($penjualans as $index => $penjualan)
+                @foreach($penjualan as $index => $item)
                 <tr>
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ $penjualan->penjualan_kode }}</td>
-                    <td>{{ $penjualan->pembeli }}</td>
-                    <td>{{ $penjualan->penjualan_tanggal }}</td>
+                    <td>{{ $item->penjualan_kode }}</td>
+                    <td>{{ $item->pembeli }}</td>
+                    <td>{{ $item->penjualan_tanggal }}</td>
                     <td>
-                        <a href="{{ url('penjualan/'.$penjualan->penjualan_id) }}" class="btn btn-info btn-sm">Detail</a>
-                        <a href="{{ url('penjualan/'.$penjualan->penjualan_id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form class="d-inline-block" method="POST" action="{{ url('penjualan/'.$penjualan->penjualan_id) }}">
+                        <a href="{{ url('penjualan/'.$item->penjualan_id) }}" class="btn btn-info btn-sm">Detail</a>
+                        <a href="{{ url('penjualan/'.$item->penjualan_id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form class="d-inline-block" method="POST" action="{{ url('penjualan/'.$item->penjualan_id) }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
