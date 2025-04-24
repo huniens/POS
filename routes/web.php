@@ -4,6 +4,7 @@
  use App\Http\Controllers\KategoriController;
  use App\Http\Controllers\LevelController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\PenjualanDetailController;
 use App\Http\Controllers\SupplierController;
  use App\Http\Controllers\UserController;
  use Illuminate\Support\Facades\Route;
@@ -115,5 +116,23 @@ Route::prefix('penjualan')->group(function () {
     Route::get('{id}/edit', [PenjualanController::class, 'edit'])->name('penjualan.edit'); // Menampilkan form edit penjualan 
     Route::put('{id}', [PenjualanController::class, 'update'])->name('penjualan.update'); // Update data penjualan 
     Route::delete('{id}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy'); // Hapus penjualan 
+});
+
+Route::group(['prefix' => 'penjualan_detail'], function () {
+    Route::get('/', [PenjualanDetailController::class, 'index'])->name('penjualan_detail.index');
+    Route::post('/list', [PenjualanDetailController::class, 'list'])->name('penjualan_detail.list');
+    Route::get('/create', [PenjualanDetailController::class, 'create'])->name('penjualan_detail.create');
+    Route::post('/', [PenjualanDetailController::class, 'store'])->name('penjualan_detail.store');
+    Route::get('/create_ajax', [PenjualanDetailController::class, 'create_ajax'])->name('penjualan_detail.create_ajax');
+    Route::post('/store_ajax', [PenjualanDetailController::class, 'store_ajax'])->name('penjualan_detail.store_ajax');
+    Route::get('/{id}', [PenjualanDetailController::class, 'show'])->name('penjualan_detail.show');
+    Route::get('/{id}/edit', [PenjualanDetailController::class, 'edit'])->name('penjualan_detail.edit');
+    Route::put('/{id}', [PenjualanDetailController::class, 'update'])->name('penjualan_detail.update');
+    Route::get('/{id}/show_ajax', [PenjualanDetailController::class, 'show_ajax'])->name('penjualan_detail.show_ajax');
+    Route::get('/{id}/edit_ajax', [PenjualanDetailController::class, 'edit_ajax'])->name('penjualan_detail.edit_ajax');
+    Route::put('/{id}/update_ajax', [PenjualanDetailController::class, 'update_ajax'])->name('penjualan_detail.update_ajax');
+    Route::get('/{id}/delete_ajax', [PenjualanDetailController::class, 'confirm_ajax'])->name('penjualan_detail.confirm_ajax');
+    Route::delete('/{id}/delete_ajax', [PenjualanDetailController::class, 'delete_ajax'])->name('penjualan_detail.delete_ajax');
+    Route::delete('/{id}', [PenjualanDetailController::class, 'destroy'])->name('penjualan_detail.destroy');
 });
  
