@@ -7,6 +7,7 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PenjualanDetailController;
 use App\Http\Controllers\SupplierController;
  use App\Http\Controllers\UserController;
+ use App\Http\Controllers\AuthController;
  use Illuminate\Support\Facades\Route;
  use App\Http\Controllers\POSController;
 use App\Http\Controllers\StokController;
@@ -135,4 +136,14 @@ Route::group(['prefix' => 'penjualan_detail'], function () {
     Route::delete('/{id}/delete_ajax', [PenjualanDetailController::class, 'delete_ajax'])->name('penjualan_detail.delete_ajax');
     Route::delete('/{id}', [PenjualanDetailController::class, 'destroy'])->name('penjualan_detail.destroy');
 });
- 
+
+
+Route::pattern('id','[0-9]+'); // artinya ketika ada parameter {id}, maka harus berupa angka
+
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class,'postlogin']);
+Route::get('logout', [AuthController::class,'logout'])->middleware('auth');
+
+Route::middleware(['auth'])->group(function(){ // artinya semua route di dalam group ini harus login dulu
+    // masukkan semua route yang perlu autentikasi di sini
+});
