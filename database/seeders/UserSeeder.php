@@ -46,10 +46,10 @@ class UserSeeder extends Seeder
             //],
 
             [
-                'user_id' => 35,
-                'level_id' => 3, // 3 = STF
-                'username' => 'staff1',
-                'nama' => 'Staff Kasir',
+                'user_id' => 36,
+                'level_id' => 2, // 3 = STF
+                'username' => 'manager1',
+                'nama' => 'Manager Hanin',
                 'password' => Hash::make('12345678'),
             ],
             
