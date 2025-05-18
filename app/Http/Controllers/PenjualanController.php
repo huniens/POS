@@ -21,18 +21,20 @@ class PenjualanController extends Controller
         $page = (object) [
             'title' => 'Daftar Penjualan yang terdaftar dalam sistem'
         ];
-        $kategori = PenjualanModel::all();
+        
+        $penjualan = PenjualanModel::with('user')->get(); // ✅ Tambahkan ini
         $users = UserModel::all();
         $activeMenu = 'penjualan';
-
+    
         return view('penjualan.index', [
             'breadcrumb' => $breadcrumb,
             'page' => $page,
-            'kategori' => $kategori,
+            'penjualan' => $penjualan, // ✅ Kirim ke view
             'activeMenu' => $activeMenu,
             'users' => $users
         ]);
     }
+    
 
 
     public function create()
