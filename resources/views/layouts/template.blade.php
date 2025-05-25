@@ -96,5 +96,20 @@
   $.ajaxSetup({headers:{'X-CSRF-TOKEN':$('META[name="csrf-token"]').attr('content')}});
   </script>
   @stack('js')<!--digunakan utk memanggil custom js dari perintah push('js')pd msg2 view-->
+
+
+
+
+<!-- Sidebar user panel -->
+<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="image">
+        <img src="{{ auth()->user()->getProfilePictureUrl() }}" class="img-circle elevation-2" alt="User Image">
+    </div>
+    <div class="info">
+        <a href="#" class="d-block">{{ auth()->user()->nama }}</a>
+    </div>
+</div>
+
+
 </body>
 </html>

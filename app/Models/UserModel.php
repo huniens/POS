@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable; // implementasi class Authenticatable
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class UserModel extends Authenticatable
 {
@@ -32,7 +33,7 @@ class UserModel extends Authenticatable
  */
 public function getRoleName(): string
 {
-    return $this->level->level_nama;
+    return $this->level ? $this->level->level_nama : 'Tidak ada level';
 }
 
 /**
@@ -50,6 +51,13 @@ public function getRoleName(): string
     public function getRole()
     {
         return $this->level->level_kode;
+    }
+
+    public function getProfilePictureUrl()
+    {
+        return $this->image
+            ? asset($this->image) // karena langsung di public/
+            : asset('adminlte/dist/img/user2-160x160.jpg');
     }
 
 }

@@ -161,21 +161,23 @@ class BarangController extends Controller
     }
     
 
-    public function import_ajax(Request $request)
-    {
-        if ($request->ajax() || $request->wantsJson()) {
-            $rules = [
-                'file_barang' => ['required', 'mimes:xlsx', 'max:1024'],
-            ];
+public function import_ajax(Request $request)
+{
+    if ($request->ajax() || $request->wantsJson()) {
+        $rules = [
+            'file_barang' => ['required', 'mimes:xlsx', 'max:1024'],
+        ];
 
-            $validator = Validator::make($request->all(), $rules);
-            if ($validator->fails()) {
-                return response()->json(['status' => false,
-                    'message' => 'Validasi Gagal',
-                    'msgField' => $validator->errors(),
-                ]);
-            }
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validasi Gagal',
+                'msgField' => $validator->errors(),
+            ]);
+        }
 
+        try {
             $file = $request->file('file_barang');
             $reader = IOFactory::createReader('Xlsx');
             $reader->setReadDataOnly(true);
@@ -202,18 +204,26 @@ class BarangController extends Controller
                     BarangModel::insertOrIgnore($insert);
                 }
 
-                return response()->json(['status' => true,
+                return response()->json([
+                    'status' => true,
                     'message' => 'Data berhasil diimport',
                 ]);
             } else {
-                return response()->json(['status' => false,
+                return response()->json([
+                    'status' => false,
                     'message' => 'Tidak ada data yang diimport',
                 ]);
             }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Terjadi error saat import: ' . $e->getMessage(),
+            ]);
         }
-
-        return redirect('/');
     }
+
+    return redirect('/');
+}
 
     public function export_excel()
     {

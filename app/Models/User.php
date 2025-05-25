@@ -31,11 +31,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    
+
     public function level()
     {
         return $this->belongsTo(Level::class, 'level_id');
     }
 
+        public function getRole()
+    {
+        return $this->level; 
+    }
+    
     public function hasRole($kode)
     {
         return $this->level && $this->level->level_kode === $kode;

@@ -19,6 +19,8 @@ use App\Http\Controllers\PenjualanDetailController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,9 @@ Route::post('login', [AuthController::class, 'postlogin']);
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'store_user']); // <- Ini penting
+
+Route::get('/profile', [UserController::class, 'profile']);
+Route::post('/profile/update-picture', [UserController::class, 'updateProfilePicture']);
 
 
 Route::middleware(['auth'])->group(function () {
@@ -126,6 +131,9 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/{id}', [BarangController::class, 'destroy']);
             Route::get('/import', [BarangController::class, 'import']);
             Route::post('/import_ajax', [BarangController::class, 'import_ajax']);
+
+            //Route::post('/barang/import_ajax', [BarangController::class, 'import_ajax'])->name('barang.import_ajax');
+
             Route::get('/export_excel', [BarangController::class, 'export_excel']); // export excel
             Route::get('/export_pdf', [BarangController::class, 'export_pdf']); // export pdf
         });
